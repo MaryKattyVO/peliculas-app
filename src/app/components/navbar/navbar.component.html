@@ -8,10 +8,16 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="BuscarPelícula" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
+        <div class="d-flex">
+          <input #txtBuscar
+                 (keyup.enter)="buscarPelicula(txtBuscar.value)"
+                 class="form-control me-2" 
+                 type="search" 
+                 placeholder="BuscarPelícula" 
+                 aria-label="Search">
+          <button (click)="buscarPelicula(txtBuscar.value)"
+                  class="btn btn-outline-success" type="submit">Buscar</button>
+        </div>
       </div>
     </div>
   </nav>
