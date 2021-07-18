@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@ANGULAR/common/http';
 import { Observable, of} from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
 import { MovieResponse } from '../interfaces/movie-response';
+import { CredistResponse } from '../interfaces/credits.response';
 
 
 
@@ -61,6 +62,16 @@ export class PeliculasService {
     
     return this.http.get<MovieResponse>(`${this.baseUrl}/movie/${id}`, {
       params: this.params
-    });
+    }).pipe(
+      catchError(err => of(null))
+    );
+  }
+  getCast( id: string){
+    return this.http.get<CredistResponse>(`${this.baseUrl}/movie/${id}/credits`, {
+      params: this.params
+    }).pipe(
+      map(resp => resp.cast),
+      catchError(err => of([])),
+    );
   }
 }
