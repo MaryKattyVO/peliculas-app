@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Movie } from 'src/app/interfaces/cartelera-response';
 import { PeliculasService } from '../../services/peliculas.service';
 
 @Component({
@@ -8,15 +9,16 @@ import { PeliculasService } from '../../services/peliculas.service';
   styleUrls: ['./buscar.component.css']
 })
 export class BuscarComponent implements OnInit {
-
+  public movies: Movie[] = [];
+  public texto: string = '';
   constructor(private activatedRoute: ActivatedRoute,
               private peliculasService: PeliculasService) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
-      console.log(params.texto);
+      this.texto = params.texto;
       this.peliculasService.buscarPeliculas(params.texto).subscribe( movies => {
-        console.log(movies[0].title)
+        this.movies = movies;
       })
     })
   }
