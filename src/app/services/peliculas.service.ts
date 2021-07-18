@@ -3,6 +3,8 @@ import { HttpClient } from '@ANGULAR/common/http';
 import { Observable, of} from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
+import { MovieResponse } from '../interfaces/movie-response';
+
 
 
 @Injectable({
@@ -52,5 +54,13 @@ export class PeliculasService {
     }).pipe(
       map( resp => resp.results)
     )
+  }
+
+  getPeliculaDetalle( id: string) {
+    console.log(id)
+    
+    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/${id}`, {
+      params: this.params
+    });
   }
 }
