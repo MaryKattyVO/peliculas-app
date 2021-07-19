@@ -4,7 +4,8 @@
   <div class="swiper-wrapper">
     <!-- Slides -->
     <div class="swiper-slide" *ngFor="let movie of movies"
-      [ngStyle]="{'background.size': 'cover',
+      [ngStyle]="{'background-size': 'cover', 
+                  'background-repeat': 'no-repeat',
                   'background-image':'url(https://image.tmdb.org/t/p/w500'+movie.backdrop_path+')'}">
       <div class="movie-description">
         <h3>{{movie.title}}</h3>
