@@ -2,6 +2,7 @@
     <div class="col-md-3 mb-5 animate__animated animate__faceIn" *ngFor="let movie of movies">
         <img    [src]="movie.poster_path | poster"
                 class="img-fluid poster"
+                [ngStyle]="{'cursor':'pointer'}"
                 (click)="onMovieClick( movie )">
         <div>
             <h3>{{movie.title}}</h3>
